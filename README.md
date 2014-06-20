@@ -34,4 +34,4 @@ JPush's officially supported Go-lang client library for accessing JPush APIs. �
 
 >	push(basic)
 
-更多接口请参考exmaple.go，所以对象定义都遵循<http://docs.jpush.cn/display/dev/REST+API>中的定义
+更多接口请参考exmaple.go，所有对象定义都遵循<http://docs.jpush.cn/display/dev/REST+API>中的定义
