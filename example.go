@@ -1,23 +1,29 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"github.com/jpush/jpush-api-go-client/push"
 )
 
-func ToJson(o interface{}) string {
-	b, _ := json.Marshal(o)
-	return string(b)
-}
+const (
+	appKey       = "7d431e42dfa6a6d693ac2d04"
+	masterSecret = "5e987ac6d2e04d95a9d8f0d1"
+)
 
 func push(po *jpush.PushPayload) {
-	appKey := "7d431e42dfa6a6d693ac2d04"
-	masterSecret := "5e987ac6d2e04d95a9d8f0d1"
-
 	jpc := jpush.NewJPushClient(appKey, masterSecret)
 	str, err := jpc.Push(po)
 	fmt.Println("result : ", str, err)
+}
+
+func report() {
+	jprc := NewJPushReportClient(appKey, masterSecret)
+	r, e := jprc.GetReportObject(1613113584, 1229760629, 1174658841, 1174658641)
+	if e == nil {
+		for _, obj := range r {
+			fmt.Println(obj.Msg_id, obj.Android_received, obj.Ios_apns_sent)
+		}
+	}
 }
 
 func main() {
@@ -49,4 +55,8 @@ func main() {
 	fmt.Println("PushPayload : ", s, e)
 
 	push(po)
+
+	////////////////////////////////////////////////////
+
+	report()
 }
